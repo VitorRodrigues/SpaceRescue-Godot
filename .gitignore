@@ -1,0 +1,9 @@
+#Ignore MACOS files
+.DS_Store
+
+#Ignore git conflict files
+*.orig
+
+#Ignore tutorial decompressed assets
+TutorialResources/SpaceShooterRedux/
+
