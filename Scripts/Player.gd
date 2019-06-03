@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var life = 100
-export var speed = 200
+export var speed = 600
 var beam_prefab
 var motion = Vector2()
 
@@ -23,10 +23,11 @@ func _physics_process(delta):
 		motion.x = speed
 	else:
 		motion.x = 0
+	
 	motion = move_and_slide(motion)
 	pass
 	
 func fire(node: NodePath):
-	var fire = beam_prefab.instance() as KinematicBody2D
+	var fire = beam_prefab.instance()
 	fire.position = get_node(node).global_position
 	get_parent().add_child(fire)

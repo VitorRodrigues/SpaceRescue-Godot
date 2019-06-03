@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Meteor.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Meteors/meteorBrown_big1.png" type="Texture" id=2]
+
+[node name="Meteor" type="Area2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 22.3304, -39.883, 48.2345, -0.410179, 34.0489, 32.2783, 11.2287, 28.5777, -20.843, 40.2962, -48.5973, 9.45803, -32.5615, -39.883 )
