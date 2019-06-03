@@ -16,9 +16,9 @@ func _physics_process(delta):
 
 # ---- COLLISIONS -----
 func _on_fire_area_entered(area):
-	hit()
 	if area.is_in_group(Game.ENEMY_GROUP):
 		area.hit(power)
+		hit()
 
 # ---- FUNCTIONS -----
 func hit():
