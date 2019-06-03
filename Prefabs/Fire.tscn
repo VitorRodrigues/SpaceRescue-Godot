@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Fire.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Lasers/laserBlue05.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sounds/sfx_laser1.ogg" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5238
@@ -18,4 +19,7 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 [connection signal="area_entered" from="." to="." method="_on_fire_area_entered"]

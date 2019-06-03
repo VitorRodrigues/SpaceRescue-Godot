@@ -8,6 +8,7 @@
 script = ExtResource( 1 )
 
 [node name="GunLeft" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( -30, 0 )
 
 [node name="FirePosition" type="Position2D" parent="GunLeft"]
@@ -18,6 +19,7 @@ texture = ExtResource( 2 )
 flip_v = true
 
 [node name="GunRight" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 30, 0 )
 
 [node name="FirePosition" type="Position2D" parent="GunRight"]

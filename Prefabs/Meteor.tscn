@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Meteor.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Meteors/meteorBrown_big1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sounds/meteor_explosion.wav" type="AudioStream" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "destroy"
 length = 2.0
 tracks/0/type = "value"
@@ -57,8 +58,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "hit"
+[sub_resource type="Animation" id=2]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -73,17 +73,17 @@ tracks/0/keys = {
 "values": [ Color( 0.984314, 0.439216, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.888889, 1 )
 colors = PoolColorArray( 0.96875, 0.909622, 0.0227051, 1, 0.988235, 0.509804, 0, 1, 1, 0.0470588, 0, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=6]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -96,7 +96,7 @@ orbit_velocity_random = 0.3
 angle_random = 0.6
 scale = 5.9
 scale_random = 0.5
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 5 )
 
 [node name="Meteor" type="Area2D"]
 collision_layer = 8
@@ -112,14 +112,17 @@ visible = false
 polygon = PoolVector2Array( 22.3304, -39.883, 48.2345, -0.410179, 34.0489, 32.2783, 11.2287, 28.5777, -20.843, 40.2962, -48.5973, 9.45803, -32.5615, -39.883 )
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
-anims/destroy = SubResource( 2 )
-anims/hit = SubResource( 1 )
+anims/destroy = SubResource( 1 )
+anims/hit = SubResource( 2 )
 
 [node name="Particles" type="Particles2D" parent="."]
-material = SubResource( 6 )
+material = SubResource( 3 )
 emitting = false
 amount = 80
 lifetime = 0.8
 explosiveness = 1.0
 randomness = 0.18
-process_material = SubResource( 5 )
+process_material = SubResource( 6 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

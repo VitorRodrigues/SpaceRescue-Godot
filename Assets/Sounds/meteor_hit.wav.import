@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/meteor_hit.wav-b5f90c6da3afb29053410aaf460d1096.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/meteor_hit.wav"
+dest_files=[ "res://.import/meteor_hit.wav-b5f90c6da3afb29053410aaf460d1096.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -36,7 +36,8 @@ func hit(power):
 func destroy():
 	remove_from_group(Game.ENEMY_GROUP)
 	$AnimPlayer.play("destroy")
-	get_tree().root.get_node("main").get_node("Camera").shake()
+	Game.get_camera().shake()
+	$Audio.play()
 	
 func die():
 	queue_free()

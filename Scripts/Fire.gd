@@ -6,6 +6,9 @@ export var power = 250
 export var speed = 600
 
 # ---- PROCESSING -----
+func _ready():
+	$Audio.play()
+
 func _process(delta):
 	if position.y < -100:
 		queue_free()
