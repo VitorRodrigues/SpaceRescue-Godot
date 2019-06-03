@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Background/star1.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Background/star2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Background/star3.png" type="Texture" id=3]
 [ext_resource path="res://Prefabs/Ship.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/MeteorSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/PowerUp.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=1]
 resource_name = "Camera"
@@ -196,6 +195,3 @@ position = Vector2( 312, 424 )
 anchor_mode = 0
 current = true
 script = SubResource( 1 )
-
-[node name="PowerUp" parent="." instance=ExtResource( 6 )]
-position = Vector2( 548.483, 421.632 )
