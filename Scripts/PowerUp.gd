@@ -10,7 +10,8 @@ func _process(delta):
 	
 
 func _on_Area2D_area_entered(area):
-	area.change_weapon(value)
+	if area.has_method("change_weapon"):
+		area.change_weapon(value)
 	remove()
 
 func remove():

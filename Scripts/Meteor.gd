@@ -34,6 +34,7 @@ func hit(power):
 		$AnimPlayer.play("hit")
 
 func destroy():
+	Game.score += 20
 	remove_from_group(Game.ENEMY_GROUP)
 	$AnimPlayer.play("destroy")
 	Game.get_camera().shake()
