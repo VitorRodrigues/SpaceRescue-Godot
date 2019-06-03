@@ -1,9 +1,8 @@
-extends KinematicBody2D
+extends Area2D
 
 var life = 100
 export var speed = 600
 var beam_prefab
-var motion = Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,18 +14,21 @@ func _process(delta):
 		fire("GunLeft/FirePosition")
 		fire("GunRight/FirePosition")
 	pass
-
-func _physics_process(delta):
+	
+	var x = 0
 	if Input.is_action_pressed("ui_left"):
-		motion.x = -speed
+		x += -speed
 	elif Input.is_action_pressed("ui_right"):
-		motion.x = speed
+		x += speed
 	else:
-		motion.x = 0
+		x = 0
+		
 	
-	motion = move_and_slide(motion)
+	var newPos = position + Vector2(x, 0) * delta
+	if newPos.x >= 45 and newPos.x <= get_viewport_rect().end.x - 45:
+		position = newPos
 	pass
-	
+
 func fire(node: NodePath):
 	var fire = beam_prefab.instance()
 	fire.position = get_node(node).global_position
