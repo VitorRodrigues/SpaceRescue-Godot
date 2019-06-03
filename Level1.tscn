@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Assets/Background/star1.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Background/star2.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Background/star3.png" type="Texture" id=3]
-[ext_resource path="res://Prefabs/Ship.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Prefabs/MeteorSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/HUD/playerLife1_blue.png" type="Texture" id=6]
+[ext_resource path="res://Assets/HUD/shader.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Background/star1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Background/star2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Background/star3.png" type="Texture" id=4]
+[ext_resource path="res://Prefabs/Ship.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/MeteorSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/HUD/playerLife1_blue.png" type="Texture" id=7]
 
 [sub_resource type="GDScript" id=4]
 script/source = "extends CanvasLayer
@@ -17,7 +18,27 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed(\"pause\") and !event.is_echo():
 		get_tree().paused = !get_tree().paused
+		if get_tree().paused:
+			$Label.show()
+			$Shader.show()
+		else:
+			$Shader.hide()
+			$Label.hide()
 "
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+
+void fragment() {
+	vec3 pixel = vec4(textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.5)).rgb;
+	float m = (pixel.r + pixel.g + pixel.b) / 3.0;
+	COLOR = vec4(m,m,m,1);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
 
 [sub_resource type="GDScript" id=1]
 resource_name = "Camera"
@@ -71,9 +92,28 @@ func _draw():
 
 [node name="main" type="CanvasLayer"]
 
-[node name="pause" type="CanvasLayer" parent="."]
+[node name="Pause" type="CanvasLayer" parent="."]
 pause_mode = 2
+layer = 11
 script = SubResource( 4 )
+
+[node name="Shader" type="TextureRect" parent="Pause"]
+visible = false
+material = SubResource( 6 )
+margin_right = 639.0
+margin_bottom = 479.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Label" type="Label" parent="Pause"]
+visible = false
+margin_left = 283.805
+margin_top = 206.736
+margin_right = 334.805
+margin_bottom = 237.736
+text = "PAUSED
+"
+align = 1
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 editor/display_folded = true
@@ -85,67 +125,67 @@ motion_mirroring = Vector2( 0, 480 )
 
 [node name="star1" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 82.0301, 189.874 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star2" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 193.262, 88.3999 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star4" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 87.8845, 443.561 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star5" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 366.939, 324.523 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star6" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 261.562, 225 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star7" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 259.611, 420.144 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star14" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 441.094, 437.706 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star15" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 562.083, 303.058 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star16" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 558.18, 445.512 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star17" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 80.0786, 53.274 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star8" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 476.22, 289.398 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star9" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 589.403, 193.777 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star10" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 497.685, 70.837 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star11" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 357.182, 12.294 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="star12" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 140.963, 345.599 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star13" type="Sprite" parent="ParallaxBackground/Stars"]
 position = Vector2( 398.553, 136.796 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="FarStars" type="ParallaxLayer" parent="ParallaxBackground"]
 editor/display_folded = true
@@ -155,87 +195,87 @@ motion_mirroring = Vector2( 0, 480 )
 [node name="star2" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 70.3216, 92.693 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star3" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 386.62, 286.731 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star4" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 276.192, 29.5912 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star5" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 507.302, 184.191 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star6" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 272.248, 153.429 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star7" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 173.651, 371.919 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star8" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 295.911, 302.507 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star9" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 361.379, 380.595 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star10" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 488.372, 376.652 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="star12" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 86.5995, 338.333 )
 scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="star13" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 86.5995, 338.333 )
 scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="star14" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 597.725, 365.94 )
 scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="star15" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 574.85, 234.215 )
 scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="star16" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 574.85, 234.215 )
 scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="star17" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 227.001, 48.8532 )
 scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="star11" type="Sprite" parent="ParallaxBackground/FarStars"]
 position = Vector2( 116.859, 207.854 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
-[node name="Ship" parent="." instance=ExtResource( 4 )]
+[node name="Ship" parent="." instance=ExtResource( 5 )]
 position = Vector2( 312, 424 )
 
-[node name="MeteorSpawner" parent="." instance=ExtResource( 5 )]
+[node name="MeteorSpawner" parent="." instance=ExtResource( 6 )]
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -243,7 +283,6 @@ current = true
 script = SubResource( 1 )
 
 [node name="Control" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 10
 
 [node name="Score" type="Label" parent="Control"]
@@ -259,4 +298,4 @@ script = SubResource( 2 )
 
 [node name="Lives" type="Node2D" parent="Control"]
 script = SubResource( 3 )
-image = ExtResource( 6 )
+image = ExtResource( 7 )
