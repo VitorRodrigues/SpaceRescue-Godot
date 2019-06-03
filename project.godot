@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Weapon",
+"class": "FastWeapon",
+"language": "GDScript",
+"path": "res://Scripts/Guns/FastWeapon.gd"
+}, {
 "base": "Area2D",
 "class": "Fire",
 "language": "GDScript",
@@ -18,10 +23,23 @@ _global_script_classes=[ {
 "class": "Meteor",
 "language": "GDScript",
 "path": "res://Scripts/Meteor.gd"
+}, {
+"base": "Weapon",
+"class": "SimpleWeapon",
+"language": "GDScript",
+"path": "res://Scripts/Guns/SimpleWeapon.gd"
+}, {
+"base": "Area2D",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Scripts/Guns/Weapon.gd"
 } ]
 _global_script_class_icons={
+"FastWeapon": "",
 "Fire": "",
-"Meteor": ""
+"Meteor": "",
+"SimpleWeapon": "",
+"Weapon": ""
 }
 
 [application]

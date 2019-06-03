@@ -3,17 +3,25 @@ extends Area2D
 var life = 100
 export var speed = 600
 
-var weapon: Weapon
+var simple_gun = preload("res://Scripts/Guns/SimpleWeapon.gd")
+var fast_gun = preload("res://Scripts/Guns/FastWeapon.gd")
+
+var guns = [
+	simple_gun.new(self),
+	fast_gun.new(self),
+]
+
+var weapon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	weapon = SimpleWeapon.new(self)
+	change_weapon(1)
 	pass # Replace with function body.
 
 func _process(delta):
 	if Input.is_action_just_pressed("fire"):
 		weapon.shot()
-	weapon.update(delta)
+	weapon.updateGun(delta)
 	
 	var x = 0
 	if Input.is_action_pressed("ui_left"):
@@ -28,65 +36,7 @@ func _process(delta):
 		position = newPos
 
 func change_weapon(value):
-	if value == 1:
-		weapon = SimpleWeapon.new(self)
-	elif value == 2:
-		weapon = FastWeapon.new(self)
+	weapon = guns[value-1]
 
 func hit():
 	queue_free()
-
-class Weapon:
-	var ship: Node2D
-	var beam_prefab = preload("res://Prefabs/Fire.tscn")
-	
-	func _init(ship: Node2D):
-		self.ship = ship
-		pass
-	
-
-class SimpleWeapon extends Weapon:
-
-	var shot_interval = 0.3
-	var last_shot = 0
-	
-	func _init(ship).(ship):
-		pass
-	
-	func fire(node: Node):
-		var fire = beam_prefab.instance()
-		fire.position = node.global_position
-		ship.get_parent().add_child(fire)
-		
-	func shot():
-		if last_shot <= 0:
-			fire(ship.get_node("GunLeft/FirePosition"))
-			fire(ship.get_node("GunRight/FirePosition"))
-			last_shot = shot_interval
-	
-	func update(delta):
-		if last_shot > 0:
-			last_shot -= delta
-			
-class FastWeapon extends Weapon:
-
-	var shot_interval = 0.1
-	var last_shot = 0
-	
-	func _init(ship).(ship):
-		pass
-		
-	func fire(node: Node):
-		var fire = beam_prefab.instance()
-		fire.position = node.global_position
-		ship.get_parent().add_child(fire)
-		
-	func shot():
-		if last_shot <= 0:
-			fire(ship.get_node("GunLeft/FirePosition"))
-			fire(ship.get_node("GunRight/FirePosition"))
-			last_shot = shot_interval
-	
-	func update(delta):
-		if last_shot > 0:
-			last_shot -= delta
