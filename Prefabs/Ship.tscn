@@ -5,6 +5,7 @@
 [ext_resource path="res://Assets/Player/playerShip1_blue.png" type="Texture" id=3]
 
 [node name="Ship" type="Area2D"]
+collision_layer = 9
 script = ExtResource( 1 )
 
 [node name="GunLeft" type="Node2D" parent="."]
@@ -36,3 +37,4 @@ texture = ExtResource( 3 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 build_mode = 1
 polygon = PoolVector2Array( 46.5232, 25.342, 49.7958, -5.92943, 27.6149, -26.2922, 8.52824, -37.1392, -8.46061, -37.1392, -30.2009, -24.4741, -49.4728, -5.20219, -46.5638, 24.2511 )
+[connection signal="area_entered" from="." to="." method="_on_ship_area_entered"]

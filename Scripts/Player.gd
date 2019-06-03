@@ -40,3 +40,8 @@ func change_weapon(value):
 
 func hit():
 	queue_free()
+
+func _on_ship_area_entered(area):
+	if area.is_in_group(Game.ENEMY_GROUP):
+		area.hit(9999)
+		Game.lives -= 1

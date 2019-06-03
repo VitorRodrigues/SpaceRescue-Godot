@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Background/star1.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Background/star2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Background/star3.png" type="Texture" id=3]
 [ext_resource path="res://Prefabs/Ship.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/MeteorSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Powerups/pill_red.png" type="Texture" id=6]
 
 [sub_resource type="GDScript" id=1]
 resource_name = "Camera"
@@ -33,9 +34,28 @@ script/source = "extends Label
 func _ready():
 	Game.connect(\"score_changed\", self, \"_on_score_changed\")
 
-
 func _on_score_changed():
 	text = str(Game.score)"
+
+[sub_resource type="GDScript" id=3]
+resource_name = "life_counter"
+script/source = "extends Node2D
+
+export(Texture) var image
+
+func _ready():
+	Game.connect(\"lives_changed\", self, \"_on_lives_changed\")
+	pass
+
+func _on_lives_changed():
+	update()
+	pass
+
+func _draw():
+	for n in range(0, Game.lives):
+		var x = n * image.get_width()
+		draw_texture(image, Vector2(x, 0))
+	pass"
 
 [node name="main" type="CanvasLayer"]
 
@@ -219,3 +239,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "1234567890"
 align = 2
 script = SubResource( 2 )
+
+[node name="Lives" type="Node2D" parent="Control"]
+script = SubResource( 3 )
+image = ExtResource( 6 )
