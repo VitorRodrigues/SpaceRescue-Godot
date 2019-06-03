@@ -1,11 +1,11 @@
 extends Area2D
-
-
 class_name Fire
-# Declare member variables here. Examples:
+
+# ---- VARIABLES -----
 export var power = 50
 export var speed = 600
 
+# ---- PROCESSING -----
 func _process(delta):
 	if position.y < -100:
 		queue_free()
@@ -13,3 +13,13 @@ func _process(delta):
 func _physics_process(delta):
 	position += Vector2(0, -speed * delta)
 	pass
+
+# ---- COLLISIONS -----
+func _on_fire_area_entered(area):
+	hit()
+	if area.is_in_group(Game.ENEMY_GROUP):
+		area.hit()
+
+# ---- FUNCTIONS -----
+func hit():
+	queue_free()

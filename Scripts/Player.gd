@@ -31,3 +31,7 @@ func fire(node: NodePath):
 	var fire = beam_prefab.instance()
 	fire.position = get_node(node).global_position
 	get_parent().add_child(fire)
+
+func hit():
+	queue_free()
+	

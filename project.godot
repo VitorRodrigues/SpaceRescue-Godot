@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Meteor",
 "language": "GDScript",
-"path": "res://Meteor.gd"
+"path": "res://Scripts/Meteor.gd"
 } ]
 _global_script_class_icons={
 "Fire": "",
@@ -29,6 +29,10 @@ _global_script_class_icons={
 config/name="SpaceRescue"
 run/main_scene="res://Level1.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Game="*res://Scripts/Game.gd"
 
 [display]
 
