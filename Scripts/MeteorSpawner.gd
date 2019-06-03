@@ -13,7 +13,7 @@ func _process(delta):
 	if wait_time > 0:
 		wait_time -= delta
 	else:
-		if (randi() % 100 >= 75):
+		if (randi() % 100 >= 95):
 			spawnPowerUp()
 		else:
 			spawnMeteor()
