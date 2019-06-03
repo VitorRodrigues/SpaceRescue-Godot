@@ -2,7 +2,7 @@ extends Area2D
 class_name Fire
 
 # ---- VARIABLES -----
-export var power = 50
+export var power = 250
 export var speed = 600
 
 # ---- PROCESSING -----
@@ -18,7 +18,7 @@ func _physics_process(delta):
 func _on_fire_area_entered(area):
 	hit()
 	if area.is_in_group(Game.ENEMY_GROUP):
-		area.hit()
+		area.hit(power)
 
 # ---- FUNCTIONS -----
 func hit():

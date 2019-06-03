@@ -5,7 +5,7 @@ class_name Meteor
 # ---- VARIABLES -----
 export var speed = 300
 export var rotation_speed = 2
-export var life = 4
+export var life = 400
 var rot = 0
 
 # ---- PROCESSING -----
@@ -23,5 +23,10 @@ func _physics_process(delta):
 	pass
 
 # ---- FUNCTIONS -----
-func hit():
+func hit(power):
+	life -= power
+	if life <= 0:
+		die()
+
+func die():
 	queue_free()
