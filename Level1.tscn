@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Background/star1.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Background/star2.png" type="Texture" id=2]
@@ -6,6 +6,18 @@
 [ext_resource path="res://Prefabs/Ship.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/MeteorSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/HUD/playerLife1_blue.png" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends CanvasLayer
+
+func _ready():
+	set_process_input(true)
+	
+
+func _input(event):
+	if event.is_action_pressed(\"pause\") and !event.is_echo():
+		get_tree().paused = !get_tree().paused
+"
 
 [sub_resource type="GDScript" id=1]
 resource_name = "Camera"
@@ -58,6 +70,10 @@ func _draw():
 	pass"
 
 [node name="main" type="CanvasLayer"]
+
+[node name="pause" type="CanvasLayer" parent="."]
+pause_mode = 2
+script = SubResource( 4 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 editor/display_folded = true
@@ -227,6 +243,7 @@ current = true
 script = SubResource( 1 )
 
 [node name="Control" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 10
 
 [node name="Score" type="Label" parent="Control"]
