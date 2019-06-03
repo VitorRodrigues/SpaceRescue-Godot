@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+resource_name = "Parallax_cam"
+script/source = "extends Camera2D
+
+var speed = 200
+
+func _process(delta):
+	offset += Vector2(0, -1) * speed * delta
+	pass"
+
+[node name="Camera" type="Camera2D"]
+anchor_mode = 0
+current = true
+script = SubResource( 1 )
