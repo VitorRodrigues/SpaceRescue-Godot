@@ -27,10 +27,11 @@ func _physics_process(delta):
 # ---- FUNCTIONS -----
 func hit(power):
 	life -= power
-	$AnimPlayer.play("hit")
 	if life <= 0:
 		alive = false
 		destroy()
+	else:
+		$AnimPlayer.play("hit")
 
 func destroy():
 	remove_from_group(Game.ENEMY_GROUP)

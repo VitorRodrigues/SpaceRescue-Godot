@@ -1,24 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Meteor.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Meteors/meteorBrown_big1.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=2]
 resource_name = "destroy"
-length = 0.5
-tracks/0/type = "method"
-tracks/0/path = NodePath(".")
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "die"
-} ]
+"update": 1,
+"values": [ true ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:scale")
@@ -30,7 +28,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath(".:modulate")
@@ -43,6 +41,20 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "die"
+} ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -61,13 +73,35 @@ tracks/0/keys = {
 "values": [ Color( 0.984314, 0.439216, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.888889, 1 )
+colors = PoolColorArray( 0.96875, 0.909622, 0.0227051, 1, 0.988235, 0.509804, 0, 1, 1, 0.0470588, 0, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 186.1
+initial_velocity_random = 0.28
+angular_velocity = 33.1
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.3
+angle_random = 0.6
+scale = 5.9
+scale_random = 0.5
+color_ramp = SubResource( 4 )
+
 [node name="Meteor" type="Area2D"]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1, 0 )
@@ -80,3 +114,12 @@ polygon = PoolVector2Array( 22.3304, -39.883, 48.2345, -0.410179, 34.0489, 32.27
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
 anims/destroy = SubResource( 2 )
 anims/hit = SubResource( 1 )
+
+[node name="Particles" type="Particles2D" parent="."]
+material = SubResource( 6 )
+emitting = false
+amount = 80
+lifetime = 0.8
+explosiveness = 1.0
+randomness = 0.18
+process_material = SubResource( 5 )
