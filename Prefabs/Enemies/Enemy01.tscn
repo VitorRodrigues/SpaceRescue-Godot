@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Prefabs/Enemies/enemyRed1.png" type="Texture" id=2]
+
+[node name="Enemy" type="Area2D"]
+collision_layer = 8
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 10.9289, 16.4394, 15.9863, 8.4071, 10.9289, 36.0741, 24.3162, 41.1315, 46.6282, -15.3925, 27.8861, -40.977, 6.76398, -22.8298, -7.51575, -22.8298, -28.0429, -40.977, -45.2975, -15.69, -23.5804, 41.1315, -11.9782, 36.9666, -15.5481, 7.81211, -10.4907, 16.142 )

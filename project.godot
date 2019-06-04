@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Scripts/Enemy.gd"
+}, {
 "base": "Weapon",
 "class": "FastWeapon",
 "language": "GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Guns/Weapon.gd"
 } ]
 _global_script_class_icons={
+"Enemy": "",
 "FastWeapon": "",
 "Fire": "",
 "Meteor": "",
@@ -51,6 +57,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Game="*res://Scripts/Game.gd"
+Resources="*res://Scripts/Resources.gd"
 
 [display]
 
