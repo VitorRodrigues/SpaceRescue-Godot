@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/MeteorFactory.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Meteor.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Meteors/meteorBrown_big1.png" type="Texture" id=3]
+[ext_resource path="res://Prefabs/Meteors/Animations.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Meteors/Particles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Meteors/Sound.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Meteors/meteorBrown_big2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Meteors/meteorGrey_med2.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Meteors/meteorBrown_small1.png" type="Texture" id=9]
+
+[node name="MeteorFactory" type="Node"]
+script = ExtResource( 1 )
+
+[node name="meteor" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 250
+rotation_speed = 5
+life = 300
+
+[node name="sprite" type="Sprite" parent="meteor"]
+texture = ExtResource( 3 )
+
+[node name="collider" type="CollisionPolygon2D" parent="meteor"]
+position = Vector2( 0, -2.09531 )
+polygon = PoolVector2Array( 33.9828, 35.3276, 49.1737, 1.27901, 22.4586, -38.0079, -32.543, -38.0079, -49.8292, 12.2793, -20.495, 43.185, 11.4583, 30.6132 )
+
+[node name="AnimPlayer" parent="meteor" instance=ExtResource( 4 )]
+
+[node name="Particles" parent="meteor" instance=ExtResource( 5 )]
+
+[node name="Audio" parent="meteor" instance=ExtResource( 6 )]
+
+[node name="meteor2" type="Area2D" parent="."]
+position = Vector2( 126.242, -1.04765 )
+linear_damp = 0.0
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 260
+life = 550
+points = 40
+
+[node name="sprite" type="Sprite" parent="meteor2"]
+texture = ExtResource( 7 )
+
+[node name="collider" type="CollisionPolygon2D" parent="meteor2"]
+position = Vector2( 0, -2.09531 )
+polygon = PoolVector2Array( 47.0784, 20.6605, 58.6025, -25.9599, 7.2677, -44.8176, -38.3051, -39.5793, -60.8295, -2.38776, -52.9722, 30.6132, -24.6856, 49.4709, -10.0185, 36.3753 )
+
+[node name="AnimPlayer" parent="meteor2" instance=ExtResource( 4 )]
+
+[node name="Particles" parent="meteor2" instance=ExtResource( 5 )]
+
+[node name="Audio" parent="meteor2" instance=ExtResource( 6 )]
+
+[node name="meteor4" type="Area2D" parent="."]
+position = Vector2( 342.581, 1.04765 )
+linear_damp = 0.0
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 320
+rotation_speed = 10
+life = 240
+points = 15
+
+[node name="sprite" type="Sprite" parent="meteor4"]
+texture = ExtResource( 8 )
+
+[node name="collider" type="CollisionPolygon2D" parent="meteor4"]
+position = Vector2( 0, -2.09531 )
+polygon = PoolVector2Array( 23.8864, -0.157143, 8.17169, -16.9195, -14.8766, -13.2528, -23.2578, 8.74788, -8.06686, 21.3197, 6.07639, 23.415 )
+
+[node name="AnimPlayer" parent="meteor4" instance=ExtResource( 4 )]
+
+[node name="Particles" parent="meteor4" instance=ExtResource( 5 )]
+
+[node name="Audio" parent="meteor4" instance=ExtResource( 6 )]
+
+[node name="meteor3" type="Area2D" parent="."]
+position = Vector2( 264.008, 5.23824 )
+linear_damp = 0.0
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 350
+rotation_speed = 20
+life = 200
+points = 5
+
+[node name="sprite" type="Sprite" parent="meteor3"]
+texture = ExtResource( 9 )
+
+[node name="collider" type="CollisionPolygon2D" parent="meteor3"]
+position = Vector2( 0, -2.09531 )
+polygon = PoolVector2Array( 14.7719, 7.80496, 12.6765, -8.4336, -6.18112, -10.5289, -14.5623, -0.0524063, -10.3717, 11.9956, 0.628601, 16.71 )
+
+[node name="AnimPlayer" parent="meteor3" instance=ExtResource( 4 )]
+
+[node name="Particles" parent="meteor3" instance=ExtResource( 5 )]
+
+[node name="Audio" parent="meteor3" instance=ExtResource( 6 )]

@@ -6,6 +6,9 @@ class_name Meteor
 export var speed = 300
 export var rotation_speed = 2
 export var life = 400
+
+export var points = 20
+
 var rot = 0
 var alive = true
 
@@ -34,7 +37,7 @@ func hit(power):
 		$AnimPlayer.play("hit")
 
 func destroy():
-	Game.score += 20
+	Game.score += points
 	remove_from_group(Game.ENEMY_GROUP)
 	$AnimPlayer.play("destroy")
 	Game.get_camera().shake()

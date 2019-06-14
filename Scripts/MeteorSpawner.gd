@@ -1,22 +1,12 @@
 extends Node2D
 
-var meteor_preload = preload("res://Prefabs/Meteor.tscn")
+var factory_preload = preload("res://Prefabs/MeteorFactory.tscn")
 var powerup_preload = preload("res://Prefabs/PowerUp.tscn")
 var wait_time = 2
-
+var factory
 func _ready():
-	# Calls set_process because type "node"
-	# is not registered to be updated
-	set_process(true)
+	factory = factory_preload.instance()
 
-func _process(delta):
-	if wait_time > 0:
-		wait_time -= delta
-	else:
-		if (randi() % 100 >= 95):
-			spawnPowerUp()
-		else:
-			spawnMeteor()
 			
 func spawnPowerUp():
 	var pup = powerup_preload.instance()
@@ -25,9 +15,15 @@ func spawnPowerUp():
 	get_parent().add_child(pup)
 	
 func spawnMeteor():
-	wait_time = rand_range(0.3, 1)
-	var meteor = meteor_preload.instance()
+	var meteor = factory.buildRandomMeteor()
 	var maxX = get_viewport_rect().end.x - 30
 	meteor.speed = rand_range(150, 300)
 	meteor.position = Vector2(rand_range(30, maxX), -60)
 	get_parent().add_child(meteor)
+	
+
+
+func _on_Timer_timeout():
+	$Timer.wait_time = rand_range(1.4, 3)
+	spawnMeteor()
+	pass # Replace with function body.
