@@ -100,7 +100,6 @@ __meta__ = {
 "_edit_group_": true
 }
 speed = 350
-rotation_speed = 20
 life = 200
 points = 5
 

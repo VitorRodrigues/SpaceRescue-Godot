@@ -1,7 +1,7 @@
 extends Node2D
 
 var factory_preload = preload("res://Prefabs/MeteorFactory.tscn")
-var powerup_preload = preload("res://Prefabs/PowerUp.tscn")
+var powerup_preload = preload("res://Prefabs/Powerups/PowerUp.tscn")
 var wait_time = 2
 var factory
 func _ready():
@@ -26,4 +26,9 @@ func spawnMeteor():
 func _on_Timer_timeout():
 	$Timer.wait_time = rand_range(1.4, 3)
 	spawnMeteor()
+	pass # Replace with function body.
+
+func _on_PowerupTimer_timeout():
+	$PowerupTimer.wait_time = rand_range(10, 30)
+	spawnPowerUp()
 	pass # Replace with function body.

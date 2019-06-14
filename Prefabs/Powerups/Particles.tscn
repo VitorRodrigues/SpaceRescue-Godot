@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -0.0292681, 0, 0, Vector2( 1, 0 ), -3.41594, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 40.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.9
+scale_random = 0.13
+scale_curve = SubResource( 2 )
+color = Color( 0.00392157, 0.439216, 0.792157, 1 )
+
+[node name="PowerUpParticles" type="Particles2D"]
+amount = 80
+preprocess = 2.0
+randomness = 1.0
+process_material = SubResource( 3 )

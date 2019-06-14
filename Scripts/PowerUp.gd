@@ -1,7 +1,7 @@
 extends Area2D
 
 export var value = 2
-var speed = 150
+export var speed = 150
 func _process(delta):
 	position += Vector2(0, speed) * delta
 	

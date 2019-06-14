@@ -1,34 +1,33 @@
 extends Area2D
-
 class_name Enemy
 
 export var life = 500
-
-var fire = preload("res://Prefabs/EnemyFire.tscn")
+export var score = 10
 
 func _ready():
 	add_to_group(Game.ENEMY_GROUP)
-	$Sprite.texture = Resources.get_random_enemy_texture()
+	_startEnemy()
 	pass
 
-func _process(delta):
+func _startEnemy():
 	pass
-
-func fire():
-	var shot = fire.instance()
-	shot.global_position = $GunPosition.global_position
-	Game.get_camera().add_child(shot)
 
 func hit(power):
 	life -= power
 	if life <= 0:
-		die()
+		Game.score += score
+		remove_from_group(Game.ENEMY_GROUP)
+		destroy()
+	else:
+		_animateHit()
+
+func _animateHit():
 	pass
 	
+func destroy():
+	die()
+
 func die():
-	Game.addScore(100)
+	Game.addScore(score)
 	queue_free()
 	pass
-
-func _on_Timer_timeout():
-	fire()

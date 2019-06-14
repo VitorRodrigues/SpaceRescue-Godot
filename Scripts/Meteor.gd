@@ -1,25 +1,23 @@
-extends Area2D
+extends Enemy
 
 class_name Meteor
 
 # ---- VARIABLES -----
 export var speed = 300
-export var rotation_speed = 2
-export var life = 400
-
-export var points = 20
+export var rotation_speed = 20
 
 var rot = 0
 var alive = true
 
 # ---- PROCESSING -----
+
 func _ready():
 	add_to_group(Game.ENEMY_GROUP)
 	randomize()
-	rot = deg2rad(rand_range(-rotation_speed, rotation_speed))
+	rot = rand_range(-rotation_speed, rotation_speed)
 
 func _physics_process(delta):
-	rotate(rot)
+	rotate(deg2rad(rot * delta))
 	if alive:
 		position += Vector2(0, speed * delta)
 	
@@ -28,17 +26,11 @@ func _physics_process(delta):
 	pass
 
 # ---- FUNCTIONS -----
-func hit(power):
-	life -= power
-	if life <= 0:
-		alive = false
-		destroy()
-	else:
-		$AnimPlayer.play("hit")
+func _animateHit():
+	$AnimPlayer.play("hit")
 
 func destroy():
-	Game.score += points
-	remove_from_group(Game.ENEMY_GROUP)
+	alive = false
 	$AnimPlayer.play("destroy")
 	Game.get_camera().shake()
 	$Audio.play()
