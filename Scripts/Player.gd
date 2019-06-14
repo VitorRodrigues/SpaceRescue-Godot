@@ -38,10 +38,16 @@ func _process(delta):
 func change_weapon(value):
 	weapon = guns[value-1]
 
-func hit():
+func die():
 	queue_free()
 
 func _on_ship_area_entered(area):
 	if area.is_in_group(Game.ENEMY_GROUP):
 		area.hit(9999)
-		Game.lives -= 1
+		hit()
+	elif area.is_in_group(Game.ENEMY_SHOT):
+		area.queue_free()
+		hit()
+
+func hit():
+	Game.lives -= 1

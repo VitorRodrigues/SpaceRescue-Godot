@@ -93,6 +93,7 @@ func _draw():
 
 [node name="Pause" type="CanvasLayer" parent="."]
 pause_mode = 2
+editor/display_folded = true
 layer = 11
 script = SubResource( 1 )
 
@@ -282,6 +283,7 @@ current = true
 script = SubResource( 4 )
 
 [node name="Control" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 10
 
 [node name="Score" type="Label" parent="Control"]

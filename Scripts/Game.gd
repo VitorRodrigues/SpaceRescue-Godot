@@ -1,6 +1,8 @@
 extends Node
 
 const ENEMY_GROUP = "enemy"
+const ENEMY_SHOT = "enemy_shot"
+const PLAYER_GROUP = "player"
 
 var score = 0 setget setScore
 var lives = 3 setget setLives
@@ -10,6 +12,7 @@ signal lives_changed
 
 func _ready():
 	randomize()
+	self.score = 0
 
 func get_camera():
 	return get_tree().root.get_node("main").get_node("Camera")
