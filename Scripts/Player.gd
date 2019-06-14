@@ -36,6 +36,8 @@ func _process(delta):
 		position = newPos
 
 func change_weapon(value):
+	if value > 1:
+		$powerup_audio.play()
 	weapon = guns[value-1]
 
 func die():
@@ -50,4 +52,7 @@ func _on_ship_area_entered(area):
 		hit()
 
 func hit():
+	if $Shield.active:
+		return
 	Game.lives -= 1
+	$Shield.active(3)

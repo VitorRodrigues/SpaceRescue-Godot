@@ -1,8 +1,57 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Cannons/gun09.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/playerShip1_blue.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sounds/powerup_pickup.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Powerups/shield2.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Area2D
+
+var active = false
+
+func _ready():
+	active(5)
+
+func active(seconds):
+	active = true
+	show()
+	$timer.one_shot = true
+	$timer.start(seconds)
+
+func _on_Shield_area_entered(area):
+	if !active: 
+		return
+	if area.is_in_group(Game.ENEMY_GROUP):
+		area.hit(9999)
+	elif area.is_in_group(Game.ENEMY_SHOT):
+		area.die()
+
+func _on_shield_timeout():
+	active = false
+	hide()
+"
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 71.3996
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
 
 [node name="Ship" type="Area2D"]
 collision_layer = 9
@@ -37,4 +86,31 @@ texture = ExtResource( 3 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 build_mode = 1
 polygon = PoolVector2Array( 46.5232, 25.342, 49.7958, -5.92943, 27.6149, -26.2922, 8.52824, -37.1392, -8.46061, -37.1392, -30.2009, -24.4741, -49.4728, -5.20219, -46.5638, 24.2511 )
+
+[node name="powerup_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+pitch_scale = 0.5
+
+[node name="Shield" type="Area2D" parent="."]
+collision_layer = 8
+script = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Shield"]
+modulate = Color( 0.133333, 0.596078, 0.87451, 1 )
+position = Vector2( 0, -12.1449 )
+texture = ExtResource( 5 )
+
+[node name="Collision" type="CollisionShape2D" parent="Shield"]
+shape = SubResource( 1 )
+
+[node name="Animation" type="AnimationPlayer" parent="Shield"]
+autoplay = "default"
+anims/default = SubResource( 2 )
+
+[node name="timer" type="Timer" parent="Shield"]
 [connection signal="area_entered" from="." to="." method="_on_ship_area_entered"]
+[connection signal="area_entered" from="Shield" to="Shield" method="_on_Shield_area_entered"]
+[connection signal="timeout" from="Shield/timer" to="Shield" method="_on_shield_timeout"]
