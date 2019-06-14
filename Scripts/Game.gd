@@ -21,7 +21,7 @@ func addScore(value):
 	self.score += value
 
 func setScore(value):
-	if value > 0:
+	if value >= 0:
 		score = value
 		emit_signal("score_changed")
 
@@ -37,5 +37,5 @@ func endGame():
 	
 func restartGame():
 	self.lives = 4
-	self.score = 0
+	self.setScore(0)
 	get_tree().reload_current_scene()

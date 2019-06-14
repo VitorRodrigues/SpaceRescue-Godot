@@ -10,7 +10,7 @@ func _ready():
 	add_to_group(Game.ENEMY_GROUP)
 	$Sprite.texture = Resources.get_random_enemy_texture()
 	pass
-	
+
 func _process(delta):
 	pass
 
