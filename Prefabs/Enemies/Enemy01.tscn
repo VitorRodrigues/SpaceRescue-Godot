@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://EnemyShip.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Enemies/enemyRed1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Effects/Explosion.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sounds/enemy_explosion.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Sounds/enemy_shot.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 44.9051, 40.6756 )
@@ -56,10 +58,17 @@ z_index = -1
 autostart = true
 
 [node name="Explosion" type="Sprite" parent="."]
+editor/display_folded = true
 visible = false
 texture = ExtResource( 3 )
 hframes = 12
 
 [node name="Anim" type="AnimationPlayer" parent="Explosion"]
 anims/Explode = SubResource( 2 )
+
+[node name="explosion_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="shot_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
